@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Nueva Persona</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .domicilio-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .domicilio-container a {
+            background-color: #007bff;
+            color: white;
+            padding: 8px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .domicilio-container a:hover {
+            background-color: #0056b3;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Agregar Nueva Persona</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ formaPersona.non_field_errors }}
+
+            <div>
+                {{ formaPersona.nombre.label_tag }}
+                {{ formaPersona.nombre }}
+            </div>
+
+            <div>
+                {{ formaPersona.apellido.label_tag }}
+                {{ formaPersona.apellido }}
+            </div>
+
+            <div>
+                {{ formaPersona.email.label_tag }}
+                {{ formaPersona.email }}
+            </div>
+
+            <div class="domicilio-container">
+                <div>
+                    {{ formaPersona.domicilio.label_tag }}
+                    {{ formaPersona.domicilio }}
+                </div>
+                <a href="{% url 'nuevo_domicilio' %}" class="btn">Agregar Domicilio</a>
+            </div>
+
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+</body>
+</html>
+
